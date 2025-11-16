@@ -6,17 +6,17 @@ ENV PYTHONUNBUFFERED=1
 ENV DISPLAY=:99
 
 # Install system dependencies
-RUN apt-get update && apt-get install -y \\
-    wget \\
-    gnupg2 \\
-    unzip \\
-    curl \\
-    xvfb \\
-    x11vnc \\
-    fluxbox \\
-    ca-certificates \\
-    apt-transport-https \\
-    lsb-release \\
+RUN apt-get update && apt-get install -y \
+    wget \
+    gnupg2 \
+    unzip \
+    curl \
+    xvfb \
+    x11vnc \
+    fluxbox \
+    ca-certificates \
+    apt-transport-https \
+    lsb-release \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Google Chrome
