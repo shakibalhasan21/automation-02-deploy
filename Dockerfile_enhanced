@@ -7,9 +7,7 @@ RUN apt-get update && apt-get install -y \
     gnupg \
     unzip \
     xvfb \
-    # Chrome dependencies
-    google-chrome-stable \
-    # Firefox dependencies  
+    # Firefox dependencies
     firefox-esr \
     # Additional tools
     fonts-liberation \
@@ -24,6 +22,8 @@ RUN apt-get update && apt-get install -y \
     libxtst6 \
     lsb-release \
     xdg-utils \
+    ca-certificates \
+    apt-transport-https \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Chrome
