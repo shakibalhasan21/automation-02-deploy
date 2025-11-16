@@ -1,3 +1,28 @@
+# Render service configuration for automation-02
+# Two deployment options shown below.
+
+services:
+  - type: web
+    name: automation-02-web
+    env: python
+    plan: free
+    region: oregon
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
+    startCommand: gunicorn ultra_powerful_app_enhanced:app --bind 0.0.0.0:$PORT
+    envVars:
+      - key: DATABASE_PATH
+        value: /data/multi_center_automation.db
+        sync: false
+
+# Notes:
+# - This configuration uses Render's Python environment and the project's
+#   `requirements.txt`. It will work for the web app portion that does not
+#   require a headful Chrome/driver at runtime.
+# - If your app uses Selenium/ChromeDriver (it appears this project may),
+#   prefer deploying using a Docker service (select "Dockerfile" in Render)
+#   or use the provided Dockerfiles in the repo (e.g., `Dockerfile_enhanced`).
+# - Do NOT commit sensitive values like `SYSTEM_PASSWORD` to the repo; set
+#   them in the Render dashboard under Environment > Environment Variables.
 services:
   - type: web
     name: wafid-booking-system

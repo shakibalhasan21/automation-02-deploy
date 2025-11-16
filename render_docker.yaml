@@ -1,0 +1,30 @@
+# Render service configuration using Docker
+services:
+  - type: web
+    name: automation-02-web-docker
+    env: docker
+    plan: free
+    region: oregon
+    dockerfilePath: Dockerfile_enhanced
+    # Allocate a small persistent disk for SQLite (adjust size as needed)
+    disk:
+      sizeGB: 2
+    envVars:
+      - key: DATABASE_PATH
+        value: /data/multi_center_automation.db
+        sync: false
+      - key: SYSTEM_PASSWORD
+        value: ""  # Set this via Render dashboard (do not commit secrets)
+        sync: false
+      - key: SECRET_KEY
+        value: ""
+        sync: false
+
+# Notes:
+# - This uses the `Dockerfile_enhanced` in the repo to build an image with
+#   Chrome/ChromeDriver support so Selenium-based automation can run.
+# - After creating the service in Render (connect repo -> select this file),
+#   open the service's Settings -> Environment to set `SYSTEM_PASSWORD` and
+#   `SECRET_KEY` values securely.
+# - The `disk` block requests a persistent disk mounted at `/data` inside the
+#   container; the app should use `/data` for SQLite to persist between deploys.
